@@ -29,11 +29,12 @@ http.interceptors.response.use(
     }
     if (error.response) {
       const { status, data } = error.response
+      const pathname = location.pathname
       if (status === 500) {
         options.variant = 'error'
       } else if (status === 401) {
         removeToken()
-        window.location.href = '/auth'
+        if (!pathname.startsWith('/auth')) window.location.href = '/auth'
       }
       enqueueSnackbar((data && data.detail) || '', options)
     }
