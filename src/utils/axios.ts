@@ -33,6 +33,7 @@ http.interceptors.response.use(
         options.variant = 'error'
       } else if (status === 401) {
         removeToken()
+        window.location.href = '/auth'
       }
       enqueueSnackbar((data && data.detail) || '', options)
     }
